@@ -13,6 +13,7 @@ installed_test_env = [
 
 subdir('gdk')
 subdir('gsk')
+subdir('gsksl')
 subdir('gtk')
 subdir('css')
 subdir('a11y')
