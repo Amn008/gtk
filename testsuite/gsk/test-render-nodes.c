@@ -346,6 +346,25 @@ cross_fade (void)
 }
 
 static GskRenderNode *
+rounded_rect (void)
+{
+  GskRenderNode *color;
+  GskRenderNode *rounded;
+
+  color = gsk_color_node_new (&(GdkRGBA) { 1, 1, 0, 1 }, 
+                               &GRAPHENE_RECT_INIT (0, 0, 200, 200));
+  rounded = gsk_rounded_clip_node_new (color,
+                                       &(GskRoundedRect) {
+                                           GRAPHENE_RECT_INIT (50, 50, 100, 100),
+                                           { { 10, 10 }, { 10, 10 }, { 10, 10 }, { 10, 10 } }
+                                       });
+
+  gsk_render_node_unref (color);
+
+  return rounded;
+}
+
+static GskRenderNode *
 cross_fades (void)
 {
   GskRenderNode *child1;
@@ -423,6 +442,7 @@ static const struct {
   { "blendmodes.node", blendmodes },
   { "cross-fades.node", cross_fades },
   { "transform.node", transform },
+  { "rounded-rect.node", rounded_rect },
 };
 
 /*** test setup ***/
